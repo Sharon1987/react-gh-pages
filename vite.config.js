@@ -10,4 +10,5 @@ export default defineConfig({
       },
     }),
   ],
+  base:'/week2/', // 與 GitHub 儲存庫名稱一致
 })
