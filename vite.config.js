@@ -10,5 +10,5 @@ export default defineConfig({
       },
     }),
   ],
-  base:'/week2/', // 與 GitHub 儲存庫名稱一致
+  base:'/react-gh-pages/', // 與 GitHub 儲存庫名稱一致
 })
