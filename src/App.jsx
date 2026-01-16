@@ -45,7 +45,7 @@ function App(){
     try{
       e.preventDefault();
       const response = await axios.post(`${API_BASE}admin/signin`, formData);
-      console.log('登入成功', response.data) ;
+      //console.log('登入成功', response.data) ;
       document.cookie = `hexToken=${response.data.token}; expires=${new Date(response.data.expired)};`;
       axios.defaults.headers.common['Authorization'] = `${response.data.token}`;
       setIsLoggedIn (true);
@@ -53,7 +53,7 @@ function App(){
       getProducts ();
 
     } catch (error) {
-      console.error('登入失敗', error.response);
+      //console.error('登入失敗', error.response);
       alert('登入失敗，請檢查帳號密碼是否正確');
       setIsLoggedIn (false);
     }
@@ -69,13 +69,13 @@ function App(){
       if (token) {
         axios.defaults.headers.common['Authorization'] = token;
       const response = await axios.post(`${API_BASE}api/user/check`);
-      console.log('驗證token', response.data);
+      //console.log('驗證token', response.data);
       alert('目前已登入');
       setIsLoggedIn (true);
       }
       
     } catch (error) {
-      console.error('驗證token失敗', error.response?.data);
+      //console.error('驗證token失敗', error.response?.data);
       alert('尚未登入，請重新登入');
       setIsLoggedIn (false);
     }
@@ -84,11 +84,12 @@ function App(){
   //取得產品清單
   const getProducts = async() => {
     try{
-      const response = await axios.get(`${API_BASE}api/${API_PATH}/products/all`);
+      const response = await axios.get(`${API_BASE}api/${API_PATH}/admin/products/all`);
       console.log('取得產品清單', response.data.products);
-      setProducts(response.data.products);
+      //setProducts(response.data.products);
+      setProducts(Object.values(response.data.products));
     } catch (error) {
-      console.error('取得產品清單失敗', error.response);
+      //console.error('取得產品清單失敗', error.response);
     }
   }
 
@@ -103,13 +104,13 @@ return (
   <input type="email" name="username" className="form-control" id="username" placeholder="name@example.com" value={formData.username}  
   onChange={(e) => handleInputChange(e)}
   />
-  <label htmlFor="floatingInput">Email address</label>
+  <label htmlFor="username">Email address</label>
 </div>
 <div className="form-floating">
   <input type="password" name='password' className="form-control" id="password" placeholder="Password" value={formData.password}
   onChange={(e) => handleInputChange(e)}
   />
-  <label htmlFor ="floatingPassword">Password</label>
+  <label htmlFor ="password">Password</label>
 </div>
 <button type="submit" className="btn btn-primary w-100 mt-2">登入</button>
 </form>
