@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
-
+import { currency } from "../../utils/filter";
 const API_BASE = import.meta.env.VITE_API_BASE;
 const API_PATH = import.meta.env.VITE_API_PATH;
 
@@ -48,16 +48,17 @@ function Products() {
       //console.error('取得產品清單失敗', error.response);
     }
   };
-  const handleViewMore = async(id) => {
-    try {
-      const response = await axios.get(`${API_BASE}/api/${API_PATH}/product/${id}`);
-      //console.log('取得單一產品資料', response.data);
-      navigate(`/product/${id}`, { state: { productData: response.data } });      
+  const handleViewMore = (id) => {
+    // try {
+    //   const response = await axios.get(`${API_BASE}/api/${API_PATH}/product/${id}`);
+    //   //console.log('取得單一產品資料', response.data);
+    //   navigate(`/product/${id}`, { state: { productData: response.data } });      
 
       
-    } catch (error) {
-      console.error('取得單一產品資料失敗', error.response);
-    }
+    // } catch (error) {
+    //   console.error('取得單一產品資料失敗', error.response);
+    // }
+    navigate(`/product/${id}`);
   }
   useEffect(() => {
    getProducts();
@@ -80,7 +81,7 @@ function Products() {
               {product.description}
             </p>
             <p className="card-text">
-              <strong>價格:</strong> {product.price} 元
+              <strong>價格:</strong> {currency(product.price)} 元
             </p>
             <p className="card-text">
               <small className="text-muted">單位: {product.unit}</small>
