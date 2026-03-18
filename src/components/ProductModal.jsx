@@ -1,6 +1,7 @@
 import * as bootstrap from "bootstrap";
 
-function ProductModal({
+function ProductModal(
+  {
   modalType,//判斷新增修改
   tempProduct,   
   handleModalInputChange,
@@ -11,7 +12,9 @@ function ProductModal({
   editProduct,
   closeModal,
   productModalRef
-}) {
+}
+  
+) {
 return (
   <div className="modal fade" id="productModal" tabIndex="-1" 
     aria-labelledby="productModalLabel" aria-hidden="true"
